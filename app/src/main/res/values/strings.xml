@@ -3,4 +3,7 @@
     <string name="city_field">Vladimir</string>
     <string name="time_field">05.10.2020</string>
     <string name="temp_field">15C</string>
+    <string name="information">Additional Information</string>
+    <string name="default_city">Moscow</string>
+    <string name="night_theme">Night theme</string>
 </resources>
