@@ -16,7 +16,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final TextView textViewCity = findViewById(R.id.textViewCity);
+        MainPresenter presenter = MainPresenter.getPresenter();
         setContentView(R.layout.activity_main);
+        textViewCity.setText(presenter.getTemperature());
 
     }
 
