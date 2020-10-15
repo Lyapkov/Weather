@@ -4,4 +4,7 @@
     <string name="city_field">Владимир</string>
     <string name="time_field">05.10.2020</string>
     <string name="temp_field">20C</string>
+    <string name="information">Дополнительная информация</string>
+    <string name="default_city">Москва</string>
+    <string name="night_theme">Ночная тема</string>
 </resources>
