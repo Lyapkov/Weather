@@ -6,4 +6,6 @@
     <string name="information">Additional Information</string>
     <string name="default_city">Moscow</string>
     <string name="night_theme">Night theme</string>
+    <string name="info">information</string>
+    <string name="language">Enter the city in English</string>
 </resources>

@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CityActivity extends AppCompatActivity {
 
+    public static final String KEY = "KEY";
+    public static final int REQUEST_CODE = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,11 @@ public class CityActivity extends AppCompatActivity {
                     public boolean onKey(View v, int keyCode, KeyEvent event) {
                         if (event.getAction() == KeyEvent.ACTION_DOWN &&
                                 (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                            Intent intentMain = new Intent(CityActivity.this, MainActivity.class);
                             String city = String.valueOf(et.getText());
-                            setContentView(R.layout.activity_main);
-                            TextView tv = findViewById(R.id.textViewCity);
-                            tv.setText(city);
+                            intentMain.putExtra(KEY, city);
+
+                            startActivityForResult(intentMain, REQUEST_CODE);
                             return true;
                         }
                         return false;
