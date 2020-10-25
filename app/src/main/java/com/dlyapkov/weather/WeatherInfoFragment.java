@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class WeatherInfoFragment extends Fragment {
@@ -46,4 +49,5 @@ public class WeatherInfoFragment extends Fragment {
         cityNameView.setText(parcel.getCityName());
         return layout;
     }
+
 }
