@@ -1,47 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/city_field"
-        android:textAlignment="center"
-        android:textSize="44sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDate"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Фрагмент с выбором городов -->
+    <fragment android:name="com.dlyapkov.weather.CityFragment"
+        android:id="@+id/cities"
+        android:layout_weight="1"
+        android:layout_width="0px"
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/time_field"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/textViewCity"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="@+id/textViewCity"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCity" />
+    <FrameLayout
+        android:id="@+id/weather"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="?android:attr/detailsElementBackground"/>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temp_field"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDate"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="@+id/textViewDate"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

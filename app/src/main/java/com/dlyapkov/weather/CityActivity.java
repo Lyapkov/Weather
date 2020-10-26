@@ -1,16 +1,13 @@
 package com.dlyapkov.weather;
 
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CityActivity extends AppCompatActivity {
 
@@ -18,79 +15,62 @@ public class CityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
-        Toast.makeText(getApplicationContext(), "onCreate()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onCreate()");
-        final EditText et = findViewById(R.id.editTextCity);
-        final CheckBox cb = findViewById(R.id.checkBoxInformation);
-        et.setOnKeyListener(
-                new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if (event.getAction() == KeyEvent.ACTION_DOWN &&
-                                (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                            String city = String.valueOf(et.getText());
-                            setContentView(R.layout.activity_main);
-                            TextView tv = findViewById(R.id.textViewCity);
-                            tv.setText(city);
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            finish();
+            return;
+        }
+
+//        if (savedInstanceState == null) {
+//            WeatherInfoFragment details = new WeatherInfoFragment();
+//            details.setArguments(getIntent().getExtras());
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, details).commit();
+//        }
+        //NodeSource nodeSource = new NodeSource(getResources());
+        initDataSource();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(getApplicationContext(), "onPause()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onPause()");
+    private void initDataSource() {
+        NodeDataSource sourceData = new NodeSourceBuilder().setResources(getResources()).build();
+
+        final NodeChangebleSource nodeChangeSource = new NodChangableSource(sourceData);
+        final NodeAdapter adapter = initRecyclerView(nodeChangeSource);
+
+        adapter.SetOnItemClickListener(new NodeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
+
+        nodeChangeSource.add();
+        nodeChangeSource.add();
+        nodeChangeSource.add();
+        nodeChangeSource.add();
+        nodeChangeSource.add();
+        adapter.notifyItemInserted(nodeChangeSource.size());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(getApplicationContext(), "onResume()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onResume()");
-    }
+    private NodeAdapter initRecyclerView(NodeChangebleSource nodeChangebleSource) {
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(getApplicationContext(), "onStop()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onStop()");
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(getApplicationContext(), "onStart()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onStart()");
-    }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast.makeText(getApplicationContext(), "onRestart()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onRestart()");
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(getApplicationContext(), "onDestroy()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onDestroy()");
-    }
+        recyclerView.setHasFixedSize(true);
 
-    @Override
-    protected void onSaveInstanceState(Bundle saveInstanceState) {
-        super.onSaveInstanceState(saveInstanceState);
-        Toast.makeText(getApplicationContext(), "onSaveInstanceState()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onSaveInstanceState()");
-    }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-    protected void onRestoreInstanceState(Bundle restoreInstanceState) {
-        super.onRestoreInstanceState(restoreInstanceState);
-        Toast.makeText(getApplicationContext(), "onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
-        Log.d("CityActivity", "onRestoreInstanceState()");
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL);
+
+        recyclerView.addItemDecoration(itemDecoration);
+
+        NodeAdapter adapter = new NodeAdapter(nodeChangebleSource);
+
+
+        recyclerView.setAdapter(adapter);
+
+        return adapter;
     }
 }

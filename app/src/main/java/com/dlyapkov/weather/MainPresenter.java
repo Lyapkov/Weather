@@ -7,7 +7,7 @@ public class MainPresenter {
     private int temperature;
 
     private MainPresenter() {
-        temperature = 15;
+        temperature = 20;
     }
 
     public int getTemperature() {
