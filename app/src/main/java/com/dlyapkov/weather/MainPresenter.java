@@ -4,18 +4,22 @@ public class MainPresenter {
 
     private final static MainPresenter presenter = new MainPresenter();
 
-    private int temperature;
+    private static WeatherRequest request;
 
     private MainPresenter() {
-        temperature = 20;
+        request = null;
     }
 
-    public int getTemperature() {
-        return temperature;
+    public void setRequest(WeatherRequest request) {
+        this.request = request;
     }
 
     public static MainPresenter getPresenter() {
         return presenter;
+    }
+
+    public static WeatherRequest getRequest() {
+        return request;
     }
 
 }
