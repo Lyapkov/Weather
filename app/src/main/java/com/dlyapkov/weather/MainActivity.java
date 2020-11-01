@@ -5,16 +5,20 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.snackbar.Snackbar;
+
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         initDataSource();
     }
@@ -24,6 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
         final NodeChangebleSource nodeChangeSource = new NodChangableSource(sourceData);
         final NodeAdapter adapter = initRecyclerView(nodeChangeSource);
+
+        final MaterialButton settingButton = findViewById(R.id.setting);
+
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Нажата кнопка Настройки", Snackbar.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         adapter.SetOnItemClickListener(new NodeAdapter.OnItemClickListener() {
             @Override
